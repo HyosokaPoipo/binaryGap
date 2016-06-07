@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class MainClass {
 
@@ -12,8 +13,141 @@ public class MainClass {
      {
        System.out.print(i);
      }
+     
+     int[] data = {3,4,4,6,1,4,4};
+     int[] data2 = {3,3,3,6,3,3,3};
+     int[] maxC = solution100(5,data2);
+     
+     System.out.println("\n");
+     for(int i:maxC)
+     {
+       System.out.print(i+" ");
+     }
 	}
 	
+	 public static int[] solution100(int N, int[] A) {
+	        // write your code in Java SE 8
+	        int[] result = new int[N];
+	        int max = 0, save_max = 0;
+	        
+	        for(int el = 0; el<A.length; el++)
+			{
+				if(A[el] == N+1)
+				{
+					save_max = max;
+				}else
+				{
+					if(result[A[el]-1] < save_max) result[A[el]-1] = save_max+1;
+					else result[A[el]-1] += 1;
+					max = result[A[el]-1]>max? result[A[el]-1]:max;
+				}	
+			
+			}
+	        
+	        for(int l=0; l<result.length; l++)
+	        {
+	        	if(result[l]<save_max) result[l] = save_max;
+	        }
+	        
+			return result;
+	        
+	    }
+	
+	
+	
+	 public int[] solution80(int N, int[] A) {
+	        // write your code in Java SE 8
+	        int[] result = new int[N];
+	        int max = 0;
+	        for(int el = 0; el<A.length; el++)
+			{
+				if(A[el] == N+1)
+				{
+					for(int i = 0; i<N; i++)
+					{
+						result[i] = max;
+					}
+				}else
+				{
+					result[A[el]-1] += 1;
+					max = result[A[el]-1]>max? result[A[el]-1]:max;
+				}	
+			
+			}
+			return result;
+	        
+	    }
+	
+	class Solution {
+	    public int[] solution(int N, int[] A) {
+	        // write your code in Java SE 8
+	        int[] result = new int[N];
+	        int max = 0;
+	        for(int el:A)
+			{
+				if(el == N+1)
+				{
+					for(int i = 0; i<N; i++)
+					{
+						result[i] = max;
+					}
+				}else
+				{
+					result[el-1] += 1;
+					max = result[el-1]>max? result[el-1]:max;
+				}	
+			
+			}
+			return result;
+	        
+	    }
+	}
+	
+	
+	public static int[] maxCount(int N, int[] A)
+	{
+		int[] result = new int[N];
+		//Inisialisasi semua element ke nool
+		for(int i = 0; i<N; i++)
+		{
+			result[i] = 0;
+		}
+		
+		for(int el:A)
+		{
+			if(el == N+1)
+			{
+				int max = findMaxArr(result);
+				for(int i = 0; i<N; i++)
+				{
+					result[i] = max;
+				}
+			}else
+			{
+				result[el] += 1;
+			}
+			
+		displayArray(result);
+		}
+		return result;
+		
+	}
+	
+	
+	public static int findMaxArr(int[]A)
+	{
+		Arrays.sort(A);
+		return A[A.length-1];
+	}
+	
+	public static void displayArray(int[] A)
+	{
+		for (int a: A)
+		{
+			System.out.print(a+" ");
+		}
+		System.out.print("\n");
+	}
 	
 	public static int binaryGap(int input)
 	{

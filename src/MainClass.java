@@ -46,15 +46,20 @@ public class MainClass {
 		return result;
 	}
 	
+	/*
+	 * A = array yang akan dirotasi
+	 * k = besar rotasi ke kanan
+	 */
 	
 	public static int[] cyclicRotation(int[] A, int k)
 	{
 		if(A.length<=1) return A;
 		int[] temp = new int[A.length];
+		int rot = (k/A.length) > 0 ? k%A.length: k;
 		for(int i=0; i<A.length; i++)
 		{
-			if(A.length - i > k) temp[k+i] = A[i];
-			else temp[k-(A.length-i)] = A[i];
+			if(A.length - i > rot) temp[rot+i] = A[i];
+			else temp[rot-(A.length-i)] = A[i];
 		}
 		return temp;
 	}
